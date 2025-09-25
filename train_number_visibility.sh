@@ -1,0 +1,1 @@
+python  src/trainer/train_number_visibility.py

@@ -1,0 +1,13 @@
+opencv-python~=4.12.0.88
+yaml~=0.2.5
+pyyaml~=6.0.2
+pathlib~=1.0.1
+torch~=2.2.0.dev20231211+cu121
+matplotlib~=3.10.0
+seaborn~=0.13.2
+torchvision~=0.17.0.dev20231211+cu121
+pillow~=11.1.0
+scikit-learn~=1.6.1
+tqdm~=4.67.1
+ultralytics~=8.3.189
+numpy~=1.26.4

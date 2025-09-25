@@ -1,0 +1,32 @@
+model:
+  name: yolo11n.pt  # Model options: yolo11n.pt, yolo11s.pt, yolo11m.pt, yolo11l.pt, yolo11x.pt
+
+training:
+  # Basic training parameters
+  epochs: 100          # Number of training epochs
+  imgsz: 1280         # Input image size
+  batch: 4            # Batch size
+  workers: 8          # Number of worker threads for data loading
+
+  # Learning rate and optimization
+  lr0: 0.01           # Initial learning rate
+  weight_decay: 0.0005 # Weight decay
+  momentum: 0.937     # SGD momentum
+
+  # Training behavior
+  patience: 50        # Early stopping patience (epochs)
+  save_period: 10     # Save checkpoint every N epochs
+  val: true           # Validate during training
+  plots: true         # Generate training plots
+
+  # Hardware and output
+  device: auto        # Device: 'auto', 'cpu', '0', '0,1,2,3' for multiple GPUs
+  project: runs/detect # Project directory
+  name: football_detection # Experiment name
+
+  # Advanced parameters (optional)
+  # amp: true         # Automatic Mixed Precision
+  # resume: false     # Resume training from last checkpoint
+  # optimizer: auto   # Optimizer: 'auto', 'SGD', 'Adam', 'AdamW'
+  # close_mosaic: 10  # Disable mosaic augmentation for final N epochs
+  # copy_paste: 0.0   # Copy-paste augmentation probability
