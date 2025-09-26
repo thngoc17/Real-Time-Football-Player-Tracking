@@ -24,7 +24,7 @@ The pipeline is designed to work in **real-time (or near real-time)**, making it
 ## 2. Project Structure
 
 ```
-.
+root/
 ├── config/
 │   ├── outputs/ (to keep models (.pth, .pt) files)
 │   └── .yaml files (for configuration)
