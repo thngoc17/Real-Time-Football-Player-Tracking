@@ -1,7 +1,16 @@
-data/
-!data/.gitkeep
-config/outputs/
-!config/outputs/.gitkeep
+# ignore everything under data
+/data/*
+
+# keep the data folder itself if you add a .gitkeep (optional)
+!/data/.gitkeep
+
+# re-include dummy_data folder and everything inside it
+!/data/dummy_data/
+!/data/dummy_data/**
+
+# other rules
+/config/outputs/*
+!/config/outputs/.gitkeep
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

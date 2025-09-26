@@ -1,4 +1,4 @@
 detection: best.pt
 color: jersey_color_model.pth
 visibility: jersey_visibility_model.pth
-video path: E:\PyCharm\YOLO_football_for_github\data\football_test\Match_1864_1_0_subclip\Match_1864_1_0_subclip.mp4
+video path: path\to\your\video
