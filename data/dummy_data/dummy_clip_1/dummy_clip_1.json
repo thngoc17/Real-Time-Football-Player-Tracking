@@ -1,0 +1,812 @@
+{
+  "licenses": [
+    {
+      "name": "",
+      "id": 0,
+      "url": ""
+    }
+  ],
+  "info": {
+    "contributor": "",
+    "date_created": "",
+    "description": "",
+    "url": "",
+    "version": "",
+    "year": ""
+  },
+  "categories": [
+    {
+      "id": 1,
+      "name": "field",
+      "supercategory": ""
+    },
+    {
+      "id": 2,
+      "name": "bystander",
+      "supercategory": ""
+    },
+    {
+      "id": 3,
+      "name": "ball",
+      "supercategory": ""
+    },
+    {
+      "id": 4,
+      "name": "player",
+      "supercategory": ""
+    }
+  ],
+  "images": [
+    {
+      "id": 1,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000000.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 2,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000001.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 3,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000002.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 4,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000003.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 5,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000004.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 6,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000005.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 7,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000006.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 8,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000007.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 9,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000008.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 10,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000009.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 11,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000010.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 12,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000011.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 13,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000012.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 14,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000013.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 15,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000014.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 16,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000015.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 17,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000016.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 18,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000017.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 19,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000018.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 20,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000019.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 21,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000020.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 22,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000021.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 23,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000022.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 24,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000023.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 25,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000024.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 26,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000025.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 27,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000026.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 28,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000027.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 29,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000028.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 30,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000029.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 31,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000030.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 32,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000031.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 33,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000032.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 34,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000033.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 35,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000034.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 36,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000035.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 37,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000036.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 38,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000037.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 39,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000038.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 40,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000039.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 41,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000040.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 42,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000041.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 43,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000042.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 44,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000043.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 45,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000044.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 46,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000045.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 47,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000046.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 48,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000047.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 49,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000048.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+    {
+      "id": 50,
+      "width": 3840,
+      "height": 1200,
+      "file_name": "frame_000049.PNG",
+      "license": 0,
+      "flickr_url": "",
+      "coco_url": "",
+      "date_captured": 0
+    },
+  ],
+"annotations": [
+    {
+      "id": 1,
+      "image_id": 1,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 227.73999999999927,
+      "bbox": [
+        1085.5,
+        405.18,
+        11.8,
+        19.3
+      ]
+    },
+    {
+      "id": 2,
+      "image_id": 1,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 236.2501999999996,
+      "bbox": [
+        1303.89,
+        393.75,
+        12.26,
+        19.27
+      ]
+    },
+    {
+      "id": 3,
+      "image_id": 1,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 259.6470000000013,
+      "bbox": [
+        1924.11,
+        375.88,
+        12.19,
+        21.3
+      ]
+    },
+    {
+      "id": 4,
+      "image_id": 1,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 298.6639999999946,
+      "bbox": [
+        2464.92,
+        391.28,
+        14.8,
+        20.18
+      ]
+    },
+    {
+      "id": 5,
+      "image_id": 1,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 262.14049999999656,
+      "bbox": [
+        2759.42,
+        403.67,
+        13.45,
+        19.49
+      ]
+    },
+    {
+      "id": 6,
+      "image_id": 1,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 1005.9420000000133,
+      "bbox": [
+        3620.41,
+        878.1,
+        27.85,
+        36.12
+      ]
+    },
+    {
+      "id": 7,
+      "image_id": 1,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 1842.9744000000042,
+      "bbox": [
+        3270.94,
+        973.3,
+        38.98,
+        47.28
+      ]
+    },
+    {
+      "id": 8,
+      "image_id": 1,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 2219.0855999999967,
+      "bbox": [
+        1926.29,
+        1146.75,
+        42.06,
+        52.76
+      ]
+    },
+    {
+      "id": 9,
+      "image_id": 1,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 1553.462799999999,
+      "bbox": [
+        447.48,
+        957.0,
+        35.72,
+        43.49
+      ]
+    },
+    {
+      "id": 10,
+      "image_id": 1,
+      "category_id": 1,
+      "segmentation": [],
+      "area": 1080.8104000000014,
+      "bbox": [
+        206.4,
+        887.66,
+        29.66,
+        36.44
+      ]
+    },
+    {
+      "id": 11,
+      "image_id": 1,
+      "category_id": 4,
+      "segmentation": [],
+      "area": 4437.329999999996,
+      "bbox": [
+        2759.18,
+        457.94,
+        42.06,
+        105.5
+      ],
+      "attributes": {
+        "object_ID": "1",
+        "facing_side": "front",
+        "jersey_number": "2",
+        "team_jersey_color": "black",
+        "occluded": "no_occluded",
+        "number_visible": "visible"
+      }
+    },
+    {
+      "id": 12,
+      "image_id": 1,
+      "category_id": 4,
+      "segmentation": [],
+      "area": 4674.200399999979,
+      "bbox": [
+        1891.14,
+        388.3,
+        41.46,
+        112.74
+      ],
+      "attributes": {
+        "object_ID": "3",
+        "facing_side": "front",
+        "jersey_number": "9",
+        "team_jersey_color": "black",
+        "occluded": "no_occluded",
+        "number_visible": "visible"
+      }
+    },
+    {
+      "id": 13,
+      "image_id": 1,
+      "category_id": 4,
+      "segmentation": [],
+      "area": 7262.99719999999,
+      "bbox": [
+        789.95,
+        581.94,
+        64.28,
+        112.99
+      ],
+      "attributes": {
+        "object_ID": "2",
+        "facing_side": "side",
+        "jersey_number": "8",
+        "team_jersey_color": "black",
+        "occluded": "no_occluded",
+        "number_visible": "partially_visible"
+      }
+    },
+    {
+      "id": 14,
+      "image_id": 1,
+      "category_id": 4,
+      "segmentation": [],
+      "area": 4233.465600000007,
+      "bbox": [
+        1012.71,
+        441.33,
+        43.68,
+        96.92
+      ],
+      "attributes": {
+        "object_ID": "4",
+        "facing_side": "side",
+        "jersey_number": "7",
+        "team_jersey_color": "black",
+        "occluded": "highly_occluded",
+        "number_visible": "partially_visible"
+      }
+    },
+    {
+      "id": 15,
+      "image_id": 1,
+      "category_id": 4,
+      "segmentation": [],
+      "area": 9167.966199999995,
+      "bbox": [
+        603.69,
+        638.04,
+        85.73,
+        106.94
+      ],
+      "attributes": {
+        "object_ID": "5",
+        "facing_side": "back",
+        "jersey_number": "10",
+        "team_jersey_color": "black",
+        "occluded": "no_occluded",
+        "number_visible": "partially_visible"
+      }
+    },
+    {
+      "id": 16,
+      "image_id": 1,
+      "category_id": 4,
+      "segmentation": [],
+      "area": 6241.5300000000025,
+      "bbox": [
+        736.85,
+        512.79,
+        55.5,
+        112.46
+      ],
+      "attributes": {
+        "object_ID": "6",
+        "facing_side": "side",
+        "jersey_number": "1",
+        "team_jersey_color": "white",
+        "occluded": "no_occluded",
+        "number_visible": "invisible"
+      }
+    },
+    {
+      "id": 17,
+      "image_id": 1,
+      "category_id": 4,
+      "segmentation": [],
+      "area": 4878.126399999998,
+      "bbox": [
+        742.37,
+        509.47,
+        57.88,
+        84.28
+      ],
+    }
+  ]
+}
