@@ -17,6 +17,7 @@ It consists of two main tasks:
 2. **Jersey Color & Number Visibility Classification**.
 
 The pipeline is designed to work in **real-time (or near real-time)**, making it suitable for analyzing football matches from live streams or recorded videos.
+
 ![Demo animation](demo_output.gif)
 ---
 
