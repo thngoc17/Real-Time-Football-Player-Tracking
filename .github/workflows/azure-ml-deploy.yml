@@ -1,0 +1,33 @@
+name: YOLO MLOps Pipeline
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'ai-core/**'
+      - '.github/workflows/azure-ml-deploy.yml'
+
+jobs:
+  deploy-yolo-model:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v3
+
+      - name: Azure Login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Install Azure ML CLI v2
+        run: |
+          az extension add -n ml -y
+
+      - name: Set Default Workspace
+        # Thay thế YOUR_WORKSPACE và YOUR_RESOURCE_GROUP bằng tên thực tế
+        run: |
+          az configure --defaults workspace=YOUR_WORKSPACE group=YOUR_RESOURCE_GROUP
+
+      - name: Deploy Model to Online Endpoint        run: |
+          az ml online-deployment create -f ai-core/deployment.yml --all-traffic

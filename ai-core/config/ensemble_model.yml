@@ -1,0 +1,6 @@
+$schema: https://azuremlschemas.azureedge.net/latest/model.schema.json
+name: football-tracking-ensemble
+version: 1
+path: ./models/
+type: custom_model
+description: "An ensemble of 3 models (YOLO11, ResNet Color, ResNet Visibility) for football player tracking. The models are packaged as a single artifact to ensure version synchronization."

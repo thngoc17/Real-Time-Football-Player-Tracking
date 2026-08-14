@@ -1,0 +1,27 @@
+$schema: https://azuremlschemas.azureedge.net/latest/managedOnlineDeployment.schema.json
+name: yolo-deployment-ver1
+endpoint_name: yolo-endpoint-ver1
+
+# Chỉ định mô hình đã đăng ký ở Ngày 3. Azure sẽ tải và mount nó vào AZUREML_MODEL_DIR
+model: azureml:football-tracking-ensemble:1
+
+environment:
+  # Trỏ tới Image bạn vừa đẩy lên ACR
+  image: acrthngoc17cv.azurecr.io/football-tracking-api:v1
+  inference_config:
+    liveness_route:
+      port: 31311
+      path: /
+    readiness_route:
+      port: 31311
+      path: /
+    scoring_route:
+      port: 31311
+      path: /score
+
+request_settings:
+  request_timeout_ms: 180000
+
+# Cấu hình tài nguyên máy ảo: B-series (2 vCPU, 4GB RAM)
+instance_type: Standard_F2s_v2
+instance_count: 1
