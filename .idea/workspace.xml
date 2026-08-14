@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d2e67dc6-bfbe-41e7-9cbd-440b693d08ff" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/config/outputs/.gitkeep" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/inference/inference.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/inference/inference.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/trainer/train_detection(!).py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/web-client/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/web-client/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,6 +29,9 @@
   &quot;associatedIndex&quot;: 7
 }</component>
   <component name="ProjectId" id="33B9oJHWem0lPd8FO9w8iGsk6Rf" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="1" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />

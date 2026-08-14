@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YOLO Real-time Inference | Technical Demo</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>YOLO Object Tracking Pipeline</h1>
+            <div class="controls">
+                <input type="file" id="videoUpload" accept="video/mp4,video/webm" />
+                <button id="togglePlay" disabled>Play / Pause</button>
+                <label>
+                    <input type="checkbox" id="toggleBBox" checked> Show Bounding Boxes
+                </label>
+            </div>
+        </header>
+
+        <main>
+            <div class="video-wrapper">
+                <!-- Thẻ video gốc bị ẩn đi, chỉ dùng làm nguồn dữ liệu -->
+                <video id="sourceVideo" muted playsinline style="display: none;"></video>
+                <!-- Canvas là nơi thực hiện toàn bộ thao tác render -->
+                <canvas id="outputCanvas"></canvas>
+
+                <!-- Bảng Telemetry Overlay -->
+                <div class="telemetry-panel">
+                    <h3>System Telemetry</h3>
+                    <p>Client FPS: <span id="fps">0</span></p>
+                    <p>Network Latency: <span id="latency">0</span> ms</p>
+                    <p>Inference Time: <span id="inference">0</span> ms</p>
+                    <p>API Status: <span id="apiStatus" class="status-ok">Idle</span></p>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="app.js"></script>
+</body>
+</html>

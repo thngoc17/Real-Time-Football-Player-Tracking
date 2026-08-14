@@ -1,9 +1,9 @@
 {
   "name": "yolo-web-client",
   "version": "1.0.0",
-  "description": "Frontend and BFF Proxy for YOLO Azure ML",
+  "description": "Frontend and BFF Proxy for YOLO",
   "scripts": {
-    "dev": "vercel dev"
+    "start": "node" 
   },
   "dependencies": {}
 }
