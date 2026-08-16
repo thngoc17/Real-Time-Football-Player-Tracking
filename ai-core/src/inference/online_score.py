@@ -25,22 +25,34 @@ def init():
     detector = YOLO(yolo_path)
     classifier = JerseyClassifier(color_model_path=color_path, visibility_model_path=vis_path)
 
+
 def run(raw_data):
     """Thực thi suy luận trên từng request JSON."""
     try:
         data = json.loads(raw_data)
-        img_bytes = base64.b64decode(data["image"])
+
+        # 1. Lấy dữ liệu linh hoạt (đề phòng API Proxy đổi key)
+        raw_b64 = data.get("image") or data.get("data")
+        if not raw_b64:
+            return {"error": "Missing image data in payload"}
+
+        # 2. Xử lý triệt để tiền tố Data URI của Canvas
+        if "," in raw_b64:
+            raw_b64 = raw_b64.split(",")[1]
+
+        # 3. Giải mã nhị phân
+        img_bytes = base64.b64decode(raw_b64)
         np_arr = np.frombuffer(img_bytes, np.uint8)
         frame = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
-        
+
         if frame is None:
-            return {"error": "Invalid image payload"}
+            return {"error": "Invalid image payload - OpenCV decode failed"}
 
         # Suy luận YOLO
         detection_results = detector(frame, conf=0.3, verbose=False)
         frame_detections = []
         crops_data = []
-        
+
         for result in detection_results:
             if result.boxes is None: continue
             for box in result.boxes:
@@ -51,16 +63,19 @@ def run(raw_data):
 
                 if conf > 0.4 and x2 > x1 and y2 > y1:
                     det_info = {
-                        "bbox": [x1, y1, x2, y2], "class_name": cls_name, "confidence": conf,
-                        "color_class": None, "vis_class": None
+                        "bbox": [x1, y1, x2, y2],
+                        "class_name": cls_name,
+                        "confidence": conf,
+                        "color_class": None,
+                        "vis_class": None
                     }
                     frame_detections.append(det_info)
-                    
+
                     if cls_name.lower() == 'player':
                         crop = frame[y1:y2, x1:x2]
                         crops_data.append(crop if crop.size > 0 else None)
-        
-        # Suy luận ResNet
+
+        # Suy luận ResNet (Giữ nguyên logic của bạn)
         if crops_data:
             clf_results = classifier.classify_batch([c for c in crops_data if c is not None])
             crop_idx = 0
@@ -70,8 +85,9 @@ def run(raw_data):
                     det["color_class"] = c_cls
                     det["vis_class"] = v_cls
                     crop_idx += 1
-                    
+
         return {"status": "success", "detections": frame_detections}
-        
+
     except Exception as e:
-        return {"error": str(e)}
+        import traceback
+        return {"error": str(e), "traceback": traceback.format_exc()}  # Thêm traceback để dễ debug trên log

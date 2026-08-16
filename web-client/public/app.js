@@ -138,24 +138,28 @@ async function executeInference() {
 }
 
 // --- HÀM VẼ BOUNDING BOX ---
-function drawBoundingBoxes(objects) {
-    // Giả định chuẩn JSON: { objects: [ { class: "player", conf: 0.95, xmin: 10, ymin: 20, xmax: 50, ymax: 100 } ] }
-    // Bạn cần điều chỉnh key cho khớp với code score.py của bạn.
-    objects.forEach(obj => {
-        const x = obj.xmin;
-        const y = obj.ymin;
-        const width = obj.xmax - obj.xmin;
-        const height = obj.ymax - obj.ymin;
+// Thay thế đoạn vẽ trong app.js
+currentBoundingBoxes = result.detections || []; // Thay vì result.objects
 
-        // Cấu hình bút vẽ
+function drawBoundingBoxes(detections) {
+    detections.forEach(det => {
+        // det.bbox là một mảng [x1, y1, x2, y2]
+        const x = det.bbox[0];
+        const y = det.bbox[1];
+        const width = det.bbox[2] - det.bbox[0];
+        const height = det.bbox[3] - det.bbox[1];
+
         ctx.strokeStyle = "#00ff00";
         ctx.lineWidth = 3;
         ctx.strokeRect(x, y, width, height);
 
-        // Vẽ nhãn (Label)
         ctx.fillStyle = "#00ff00";
         ctx.font = "14px Arial";
-        const label = `${obj.class} ${Math.round(obj.conf * 100)}%`;
+
+        // Cập nhật key theo API mới
+        let label = `${det.class_name} ${Math.round(det.confidence * 100)}%`;
+        if (det.color_class) label += ` | ${det.color_class}`;
+
         ctx.fillText(label, x, y - 5);
     });
 }
