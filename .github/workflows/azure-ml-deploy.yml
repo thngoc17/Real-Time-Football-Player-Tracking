@@ -7,6 +7,8 @@ on:
     paths:
       - 'ai-core/**'
       - '.github/workflows/azure-ml-deploy.yml'
+    tags:
+      - 'v*.*.*' # Chỉ chạy khi có git tag dạng v1.0.0
 
 env:
   WORKSPACE: "mlops-workspace"
@@ -43,13 +45,21 @@ jobs:
       - name: Docker Build & Push Image
         run: |
           IMAGE_URI="${{ env.ACR_NAME }}.azurecr.io/football-tracking-api:${{ env.IMAGE_TAG }}"
-          echo "Building Docker image: $IMAGE_URI"
+          echo "Target Image URI: $IMAGE_URI"
           
-          # Cập nhật file deployment.yml để sử dụng image tag mới nhất trước khi deploy
+          # Cập nhật file deployment.yml để luôn sử dụng tag này
           sed -i "s|image: .*|image: $IMAGE_URI|g" ai-core/config/deployment.yml
           
-          docker build -t $IMAGE_URI ./ai-core
-          docker push $IMAGE_URI
+          # Kiểm tra xem tag đã tồn tại trên ACR chưa
+          TAG_EXISTS=$(az acr repository show-tags -n ${{ env.ACR_NAME }} --repository football-tracking-api --query "[?@=='${{ env.IMAGE_TAG }}']" -o tsv)
+          
+          if [ -n "$TAG_EXISTS" ]; then
+            echo "Image with tag ${{ env.IMAGE_TAG }} already exists in ACR. SKIPPING build and push."
+          else
+            echo "Tag not found. Building and pushing new Docker image..."
+            docker build -t $IMAGE_URI ./ai-core
+            docker push $IMAGE_URI
+          fi
 
       - name: Register Ensemble Model
         run: |
