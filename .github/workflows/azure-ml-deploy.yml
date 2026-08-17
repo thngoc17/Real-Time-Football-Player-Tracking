@@ -1,4 +1,4 @@
-name: YOLO MLOps Pipeline
+name: MLOps Pipeline - YOLO Football Tracking
 
 on:
   push:
@@ -8,8 +8,16 @@ on:
       - 'ai-core/**'
       - '.github/workflows/azure-ml-deploy.yml'
 
+env:
+  WORKSPACE: "mlops-workspace"
+  RESOURCE_GROUP: "CV-YOLO-rg"
+  ACR_NAME: "acrthngoc17cv"
+  ENDPOINT_NAME: "yolo-endpoint-ver1"
+  DEPLOYMENT_NAME: "yolo-deployment-ver1"
+  IMAGE_TAG: "v1.${{ github.run_number }}" # Tag image linh hoạt theo từng lần chạy
+
 jobs:
-  deploy-yolo-model:
+  build-register-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Source Code
@@ -20,15 +28,53 @@ jobs:
         with:
           creds: ${{ secrets.AZURE_CREDENTIALS }}
 
-      - name: Install Azure ML CLI v2
+      - name: Install Azure ML Extension
         run: |
           az extension add -n ml -y
 
-      - name: Set Default Workspace
-        # Thay thế YOUR_WORKSPACE và YOUR_RESOURCE_GROUP bằng tên thực tế
+      - name: Set Default Azure ML Workspace
         run: |
-          az configure --defaults workspace=YOUR_WORKSPACE group=YOUR_RESOURCE_GROUP
+          az configure --defaults workspace=${{ env.WORKSPACE }} group=${{ env.RESOURCE_GROUP }}
 
-      - name: Deploy Model to Online Endpoint
+      - name: Login to Azure Container Registry (ACR)
         run: |
-          az ml online-deployment create -f ai-core/config/deployment.yml --all-traffic
+          az acr login --name ${{ env.ACR_NAME }}
+
+      - name: Docker Build & Push Image
+        run: |
+          IMAGE_URI="${{ env.ACR_NAME }}.azurecr.io/football-tracking-api:${{ env.IMAGE_TAG }}"
+          echo "Building Docker image: $IMAGE_URI"
+          
+          # Cập nhật file deployment.yml để sử dụng image tag mới nhất trước khi deploy
+          sed -i "s|image: .*|image: $IMAGE_URI|g" ai-core/config/deployment.yml
+          
+          docker build -t $IMAGE_URI ./ai-core
+          docker push $IMAGE_URI
+
+      - name: Register Ensemble Model
+        run: |
+          echo "Registering model football-tracking-ensemble..."
+          az ml model create -f ai-core/config/ensemble_model.yml
+
+      - name: Create or Update Online Endpoint
+        run: |
+          echo "Configuring online endpoint: ${{ env.ENDPOINT_NAME }}"
+          # Lệnh 'create' của Endpoint trong Azure CLI v2 tự động cập nhật nếu đã tồn tại
+          az ml online-endpoint create -n ${{ env.ENDPOINT_NAME }} -f ai-core/config/endpoint.yml
+
+      - name: Create or Update Online Deployment (Idempotent Logic)
+        run: |
+          echo "Checking status of deployment: ${{ env.DEPLOYMENT_NAME }}..."
+          
+          if az ml online-deployment show -n ${{ env.DEPLOYMENT_NAME }} -e ${{ env.ENDPOINT_NAME }}; then
+            echo "Deployment exists. Proceeding with UPDATE..."
+            az ml online-deployment update -n ${{ env.DEPLOYMENT_NAME }} -e ${{ env.ENDPOINT_NAME }} -f ai-core/config/deployment.yml
+          else
+            echo "Deployment does not exist. Proceeding with CREATE..."
+            az ml online-deployment create -n ${{ env.DEPLOYMENT_NAME }} -e ${{ env.ENDPOINT_NAME }} -f ai-core/config/deployment.yml
+          fi
+
+      - name: Route Traffic to Deployment
+        run: |
+          echo "Routing 100% traffic to ${{ env.DEPLOYMENT_NAME }}..."
+          az ml online-endpoint update -n ${{ env.ENDPOINT_NAME }} --traffic "${{ env.DEPLOYMENT_NAME }}=100"
