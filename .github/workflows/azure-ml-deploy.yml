@@ -53,8 +53,26 @@ jobs:
 
       - name: Register Ensemble Model
         run: |
-          echo "Registering model football-tracking-ensemble..."
-          az ml model create -f ai-core/config/ensemble_model.yml
+          # Trích xuất tên và version từ file YAML
+          MODEL_NAME=$(grep '^name:' ai-core/config/ensemble_model.yml | awk '{print $2}' | tr -d '"' | tr -d "'")
+          MODEL_VERSION=$(grep '^version:' ai-core/config/ensemble_model.yml | awk '{print $2}' | tr -d '"' | tr -d "'")
+          
+          # Nếu file YAML không có định nghĩa version (Azure ML tự động auto-increment)
+          if [ -z "$MODEL_VERSION" ]; then
+            echo "No explicit version found in YAML. Proceeding with auto-increment registration..."
+            az ml model create -f ai-core/config/ensemble_model.yml
+            exit 0
+          fi
+          
+          echo "Checking if Model: $MODEL_NAME, Version: $MODEL_VERSION exists..."
+          
+          # Lệnh az ml model show sẽ thành công (trả về 0) nếu model tồn tại
+          if az ml model show --name "$MODEL_NAME" --version "$MODEL_VERSION" > /dev/null 2>&1; then
+            echo "Model $MODEL_NAME version $MODEL_VERSION already exists. SKIPPING registration."
+          else
+            echo "Model version not found. Registering model..."
+            az ml model create -f ai-core/config/ensemble_model.yml
+          fi
 
       - name: Create or Update Online Endpoint
         run: |
