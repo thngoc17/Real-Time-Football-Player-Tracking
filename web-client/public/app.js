@@ -1,3 +1,5 @@
+// File: /web-client/public/app.js
+
 // --- CÁC BIẾN TRẠNG THÁI (STATE) ---
 const video = document.getElementById('sourceVideo');
 const canvas = document.getElementById('outputCanvas');
@@ -14,6 +16,9 @@ let isPlaying = false;
 let animationFrameId;
 let currentBoundingBoxes = [];
 let isApiProcessing = false;
+
+// Tối ưu Delay: Tỉ lệ scale để vẽ bounding box khớp với kích thước thật nếu ảnh bị thu nhỏ
+let globalScaleFactor = 1;
 
 // Cấu hình Throttling (Giới hạn gọi API)
 const INFERENCE_FPS_LIMIT = 5; // Chỉ gọi Azure 5 lần/giây để tiết kiệm băng thông
@@ -98,12 +103,31 @@ async function executeInference() {
     statusUI.className = "status-syncing";
 
     try {
-        // Nén frame hiện tại thành Base64 JPEG.
-        // TỐI QUAN TRỌNG: Chỉ số 0.6 giảm dung lượng ảnh đi khoảng 60% so với gốc.
-        const base64Frame = canvas.toDataURL('image/jpeg', 0.6);
+        // TỐI ƯU DELAY #1: Resize ảnh xuống tối đa 640px trước khi gửi
+        const MAX_WIDTH = 640;
+        let base64Frame;
+
+        if (canvas.width > MAX_WIDTH) {
+            globalScaleFactor = canvas.width / MAX_WIDTH;
+
+            // Tạo canvas tạm để thu nhỏ ảnh
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = MAX_WIDTH;
+            tempCanvas.height = canvas.height / globalScaleFactor;
+
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.drawImage(canvas, 0, 0, tempCanvas.width, tempCanvas.height);
+
+            // Chỉ số 0.6 giảm dung lượng ảnh đi khoảng 60% so với gốc
+            base64Frame = tempCanvas.toDataURL('image/jpeg', 0.6);
+        } else {
+            globalScaleFactor = 1;
+            base64Frame = canvas.toDataURL('image/jpeg', 0.6);
+        }
+
         const startTime = performance.now();
 
-        // Gửi qua Vercel Serverless Proxy (Ngày 4 của Sprint)
+        // Gửi qua Vercel Serverless Proxy
         const response = await fetch('/api/proxy', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -115,13 +139,13 @@ async function executeInference() {
         const result = await response.json();
         const endTime = performance.now();
 
-        // Cập nhật trạng thái dùng để render
-        currentBoundingBoxes = result.objects || [];
+        // SỬA LỖI #2 & #3: Lấy đúng key detections từ response đã được flatten
+        currentBoundingBoxes = result.detections || [];
 
         // Cập nhật Telemetry
         document.getElementById('latency').innerText = Math.round(endTime - startTime);
-        // Giả sử Azure ML trả về số liệu inference_time bên trong JSON
-        document.getElementById('inference').innerText = result.inference_time_ms || 0;
+        // Lấy inference_ms thông qua object telemetry đã set ở proxy.js
+        document.getElementById('inference').innerText = (result.telemetry && result.telemetry.inference_ms) || 0;
 
         statusUI.innerText = "Connected";
         statusUI.className = "status-ok";
@@ -130,24 +154,21 @@ async function executeInference() {
         console.error("Inference Error:", error);
         statusUI.innerText = "Error / Timeout";
         statusUI.className = "status-error";
-        // Graceful Degradation: Không xóa bounding box cũ ngay lập tức,
-        // hoặc bạn có thể gán currentBoundingBoxes = [] tùy quy trình.
     } finally {
         isApiProcessing = false;
     }
 }
 
 // --- HÀM VẼ BOUNDING BOX ---
-// Thay thế đoạn vẽ trong app.js
-currentBoundingBoxes = result.detections || []; // Thay vì result.objects
+// SỬA LỖI #2: Đã xóa dòng "currentBoundingBoxes = result.detections || [];" rác bên ngoài hàm
 
 function drawBoundingBoxes(detections) {
     detections.forEach(det => {
-        // det.bbox là một mảng [x1, y1, x2, y2]
-        const x = det.bbox[0];
-        const y = det.bbox[1];
-        const width = det.bbox[2] - det.bbox[0];
-        const height = det.bbox[3] - det.bbox[1];
+        // Áp dụng globalScaleFactor để đưa tọa độ về đúng kích thước video gốc
+        const x = det.bbox[0] * globalScaleFactor;
+        const y = det.bbox[1] * globalScaleFactor;
+        const width = (det.bbox[2] - det.bbox[0]) * globalScaleFactor;
+        const height = (det.bbox[3] - det.bbox[1]) * globalScaleFactor;
 
         ctx.strokeStyle = "#00ff00";
         ctx.lineWidth = 3;

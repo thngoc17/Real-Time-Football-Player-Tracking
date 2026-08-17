@@ -1,10 +1,10 @@
 // File: /web-client/api/proxy.js
 
 export const config = {
-  // Tối ưu hóa: API nhận ảnh base64 có thể lớn, cấu hình body size limit (Mặc định của Vercel Serverless là 4.5MB)
+  // Tối ưu hóa: API nhận ảnh base64 có thể lớn, cấu hình body size limit
   api: {
     bodyParser: {
-      sizeLimit: '4mb', 
+      sizeLimit: '4mb',
     },
   },
 };
@@ -33,14 +33,8 @@ export default async function handler(req, res) {
     }
 
     // 2. Chuyển tiếp Request sang Azure ML
-    // Lưu ý: Cấu trúc JSON payload ở đây phụ thuộc vào cách bạn viết file score.py trên Azure.
-    // Dưới đây là định dạng mặc định thường dùng, hãy điều chỉnh cho khớp với model của bạn.
-    const azurePayload = {
-      "input_data": {
-        "columns": ["image"],
-        "data": [image]
-      }
-    };
+    // SỬA LỖI #3: Gửi payload đúng định dạng mà score.py mong đợi (không bọc trong input_data/columns)
+    const azurePayload = { image };
 
     const startTime = Date.now();
 
@@ -55,32 +49,30 @@ export default async function handler(req, res) {
 
     const inferenceTime = Date.now() - startTime;
 
-    // 3. Bắt lỗi trả về từ Azure (Timeout, 401, 500...)
+    // 3. Bắt lỗi trả về từ Azure
     if (!response.ok) {
       const errorText = await response.text();
       console.error(`Azure ML Error (${response.status}):`, errorText);
-      return res.status(response.status).json({ 
+      return res.status(response.status).json({
         error: 'Inference failed on Azure ML',
-        details: response.status === 401 ? 'Unauthorized' : 'Gateway Timeout/Error' 
+        details: response.status === 401 ? 'Unauthorized' : 'Gateway Timeout/Error'
       });
     }
 
     // 4. Bóc tách và chuẩn hóa JSON trả về cho Frontend
     const azureData = await response.json();
-    
-    // Gửi kèm thời gian xử lý thực tế của Azure (Inference Time) để phục vụ cho Bảng Telemetry ngày mai
+
+    // SỬA LỖI #3: Spread object `azureData` để "detections" nằm ngay top-level
     return res.status(200).json({
       success: true,
-      data: azureData,
+      ...azureData,
       telemetry: {
         inference_ms: inferenceTime
       }
     });
 
   } catch (error) {
-    // Bắt lỗi hệ thống (ví dụ: mất kết nối mạng giữa Vercel và Azure)
     console.error("Proxy execution error:", error);
     return res.status(500).json({ error: 'Internal Server Error processing request' });
   }
 }
-

@@ -512,7 +512,7 @@ def main():
     root_dir = script_dir.parent.parent  # root
     data_dir = root_dir / "data"
     config_dir = root_dir / "config"
-    outputs_dir = config_dir / "outputs"
+    outputs_dir = config_dir / "models"
 
     # Create outputs directory if it doesn't exist
     outputs_dir.mkdir(parents=True, exist_ok=True)

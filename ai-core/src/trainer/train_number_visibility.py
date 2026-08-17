@@ -556,7 +556,7 @@ def main():
     results_dir.mkdir(parents=True, exist_ok=True)
 
     # Create outputs directory (for model .pth files) if it doesn't exist
-    outputs_dir = config_dir / "outputs"
+    outputs_dir = config_dir / "models"
     outputs_dir.mkdir(parents=True, exist_ok=True)
 
     # Set default config path
@@ -590,7 +590,7 @@ def main():
 
     # Set paths
     data_path = str(data_dir / "visibility_dataset")
-    # Save model in root/config/outputs as requested
+    # Save model in root/config/models as requested
     model_save_path = str(outputs_dir / "jersey_visibility_model.pth")
 
     # Check if dataset exists

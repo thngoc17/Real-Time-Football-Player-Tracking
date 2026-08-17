@@ -29,5 +29,6 @@ jobs:
         run: |
           az configure --defaults workspace=YOUR_WORKSPACE group=YOUR_RESOURCE_GROUP
 
-      - name: Deploy Model to Online Endpoint        run: |
-          az ml online-deployment create -f ai-core/deployment.yml --all-traffic
+      - name: Deploy Model to Online Endpoint
+        run: |
+          az ml online-deployment create -f ai-core/config/deployment.yml --all-traffic
